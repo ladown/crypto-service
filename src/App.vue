@@ -76,9 +76,7 @@
       <section>
         <div class="flex">
           <div class="max-w-xs">
-            <label for="wallet" class="block text-sm font-medium text-gray-700">
-              Тикер
-            </label>
+            <label for="wallet" class="block text-sm font-medium text-gray-700"> Тикер </label>
             <div class="mt-1 relative rounded-md shadow-md">
               <input
                 v-model="ticker"
@@ -99,9 +97,7 @@
                 placeholder="Например DOGE"
               />
             </div>
-            <div
-              class="flex bg-white shadow-md p-1 rounded-md shadow-md flex-wrap"
-            >
+            <div class="flex bg-white shadow-md p-1 rounded-md shadow-md flex-wrap">
               <span
                 class="
                   inline-flex
@@ -142,10 +138,7 @@
             hover:bg-gray-700
             transition-colors
             duration-300
-            focus:outline-none
-            focus:ring-2
-            focus:ring-offset-2
-            focus:ring-gray-500
+            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500
           "
         >
           <!-- Heroicon name: solid/mail -->
@@ -190,10 +183,7 @@
                 hover:bg-gray-700
                 transition-colors
                 duration-300
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-gray-500
+                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500
               "
             >
               Назад
@@ -219,10 +209,7 @@
                 hover:bg-gray-700
                 transition-colors
                 duration-300
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-gray-500
+                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500
               "
             >
               Вперед
@@ -262,9 +249,7 @@
             "
           >
             <div class="px-4 py-5 sm:p-6 text-center">
-              <dt class="text-sm font-medium text-gray-500 truncate">
-                {{ t.name }} - USD
-              </dt>
+              <dt class="text-sm font-medium text-gray-500 truncate">{{ t.name }} - USD</dt>
               <dd class="mt-1 text-3xl font-semibold text-gray-900">
                 {{ t.price }}
               </dd>
@@ -306,7 +291,10 @@
         </dl>
         <hr class="w-full border-t border-gray-600 my-4" />
       </template>
-      <section v-if="sel" class="relative">
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
+      <!-- <section v-if="sel" class="relative">
         <h3 class="text-lg leading-6 font-medium text-gray-900 my-8">
           {{ sel.name }} - USD
         </h3>
@@ -345,7 +333,7 @@
             </g>
           </svg>
         </button>
-      </section>
+      </section> -->
     </div>
   </div>
 </template>
@@ -367,9 +355,7 @@ export default {
     };
   },
   async created() {
-    const f = await fetch(
-      "https://min-api.cryptocompare.com/data/all/coinlist?summary=true"
-    );
+    const f = await fetch("https://min-api.cryptocompare.com/data/all/coinlist?summary=true");
     const data = await f.json();
     this.loading = false;
     this.coins = Object.keys(data.Data).map((val) => val);
@@ -389,9 +375,7 @@ export default {
       const start = (this.page - 1) * 6;
       const end = this.page * 6;
 
-      const filteredTickers = this.tickers.filter((ticker) =>
-        ticker.name.includes(this.filter)
-      );
+      const filteredTickers = this.tickers.filter((ticker) => ticker.name.includes(this.filter));
 
       this.hasNextPage = filteredTickers.length > end;
 
@@ -400,7 +384,7 @@ export default {
     subscribeToUpdates(tickerName) {
       setInterval(async () => {
         const f = await fetch(
-          `https://min-api.cryptocompare.com/data/price?fsym=${tickerName}&tsyms=USD&api_key=f6d4c2d8e53925158ac8535633b52fb2466d6d121a760225cab3c0f1731e6364`
+          `https://min-api.cryptocompare.com/data/price?fsym=${tickerName}&tsyms=USD&api_key=f6d4c2d8e53925158ac8535633b52fb2466d6d121a760225cab3c0f1731e6364`,
         );
         const data = await f.json();
         this.tickers.find((t) => t.name === tickerName).price =
@@ -430,9 +414,7 @@ export default {
     normalizeGraph() {
       const maxValue = Math.max(...this.graph);
       const minValue = Math.min(...this.graph);
-      return this.graph.map(
-        (price) => 5 + ((price - minValue) * 95) / (maxValue - minValue)
-      );
+      return this.graph.map((price) => 5 + ((price - minValue) * 95) / (maxValue - minValue));
     },
   },
   watch: {
@@ -441,14 +423,14 @@ export default {
       window.history.pushState(
         null,
         document.title,
-        `${window.location.pathname}?filter=${this.filter}&page=${this.page}`
+        `${window.location.pathname}?filter=${this.filter}&page=${this.page}`,
       );
     },
     page() {
       window.history.pushState(
         null,
         document.title,
-        `${window.location.pathname}?filter=${this.filter}&page=${this.page}`
+        `${window.location.pathname}?filter=${this.filter}&page=${this.page}`,
       );
     },
   },
