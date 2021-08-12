@@ -384,7 +384,7 @@ export default {
     subscribeToUpdates(tickerName) {
       setInterval(async () => {
         const f = await fetch(
-          `https://min-api.cryptocompare.com/data/price?fsym=${tickerName}&tsyms=USD&api_key=f6d4c2d8e53925158ac8535633b52fb2466d6d121a760225cab3c0f1731e6364`,
+          `https://min-api.cryptocompare.com/data/price?fsym=${tickerName}&tsyms=USD&api_key=f6d4c2d8e53925158ac8535633b52fb2466d6d121a760225cab3c0f1731e6364`
         );
         const data = await f.json();
         this.tickers.find((t) => t.name === tickerName).price =
@@ -423,14 +423,14 @@ export default {
       window.history.pushState(
         null,
         document.title,
-        `${window.location.pathname}?filter=${this.filter}&page=${this.page}`,
+        `${window.location.pathname}?filter=${this.filter}&page=${this.page}`
       );
     },
     page() {
       window.history.pushState(
         null,
         document.title,
-        `${window.location.pathname}?filter=${this.filter}&page=${this.page}`,
+        `${window.location.pathname}?filter=${this.filter}&page=${this.page}`
       );
     },
   },
